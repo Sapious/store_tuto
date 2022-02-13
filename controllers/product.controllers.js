@@ -14,12 +14,34 @@ const createProduct = async (req, res) => {
 	}
 };
 
-//get product by id
+const getProduct = async (req, res) => {
+	const id = req.params.productId;
 
-//get products
+	try {
+		const product = await Product.findById(id);
+		return res.status(200).json(product);
+	} catch (err) {
+		return res.status(500).json(err);
+	}
+};
+const getProducts = async (req, res) => {
+	try {
+		const products = await Product.find();
+		return res.status(200).json(products);
+	} catch (err) {
+		return res.status(500).json(err);
+	}
+};
+const deleteProduct = async (req, res) => {
+	const id = req.params.productId;
 
-//delete product
-
+	try {
+		const deletedProduct = await Product.findByIdAndDelete(id);
+		return res.status(200).json(deletedProduct);
+	} catch (err) {
+		return res.status(500).json(err);
+	}
+};
 const updateProduct = async (req, res) => {
 	const id = req.params.productId;
 
@@ -34,3 +56,6 @@ const updateProduct = async (req, res) => {
 };
 module.exports.createProduct = createProduct;
 module.exports.updateProduct = updateProduct;
+module.exports.getProduct = getProduct;
+module.exports.getProducts = getProducts;
+module.exports.deleteProduct = deleteProduct;
