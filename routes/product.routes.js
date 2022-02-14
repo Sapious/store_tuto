@@ -1,15 +1,16 @@
 const {
 	createProduct,
 	updateProduct,
-    deleteProduct,
-    getProduct,
-    getProducts,
+	deleteProduct,
+	getProduct,
+	getProducts,
 } = require("../controllers/product.controllers");
+const verifyToken = require("../middlewares/verifyToken");
 const router = require("express").Router();
 
-router.post("/", createProduct);
-router.put("/:productId", updateProduct);
-router.delete("/:productId", deleteProduct);
+router.post("/", verifyToken, createProduct);
+router.put("/:productId", verifyToken, updateProduct);
+router.delete("/:productId", verifyToken, deleteProduct);
 router.get("/:productId", getProduct);
-router.get('/', getProducts)
+router.get("/", getProducts);
 module.exports = router;
