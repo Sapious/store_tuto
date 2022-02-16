@@ -40,7 +40,6 @@ const updateAddress = async (req, res) => {
         return res.status(500).json(err);
     }
 };
-module.exports.createAddress = createAddress;
 module.exports.updateAddress = updateAddress;
 module.exports.getAddress = getAddress;
 module.exports.getAddresses = getAddresses;
