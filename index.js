@@ -19,6 +19,7 @@ const categoryRouter = require("./routes/category.routes");
 const authRouter = require("./routes/auth.routes");
 const addressRouter = require("./routes/address.routes");
 const orderRouter = require("./routes/order.routes");
+const cartRouter = require("./routes/cart.routes");
 //middlewares
 
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use("/categories", categoryRouter);
 app.use("/auth", authRouter);
 app.use("/addresses", addressRouter);
 app.use("/orders", orderRouter);
+app.use("/carts", cartRouter);
 //server listening
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
