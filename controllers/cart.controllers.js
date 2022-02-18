@@ -30,7 +30,14 @@ const addItemToCart = async (req, res) => {
     const item = { ...req.body.item, total: req.body.item.price * req.body.item.quantity };
     try {
         const cart = await Cart.findById(cartId);
-        cart.items.push(item);
+        const itemIndex = cart.items.map(itemElement => itemElement.product.toString()).indexOf(item.product);
+        if (itemIndex !== -1) {
+            cart.items[itemIndex].quantity = cart.items[itemIndex].quantity + item.quantity;
+            cart.items[itemIndex].total = cart.items[itemIndex].quantity * cart.items[itemIndex].price;
+        } else {
+            cart.items.push(item);
+        }
+
         const savedCart = await cart.save();
         return res.status(200).json(savedCart);
     } catch (err) {

@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Cart = require("./cart.models");
 const UserSchema = new mongoose.Schema(
     {
         firstName: { type: String },
@@ -18,14 +17,4 @@ const UserSchema = new mongoose.Schema(
     },
     { timestamps: true },
 );
-UserSchema.pre("validate", function (next) {
-    if (!this.cart) {
-        this.createCart();
-    }
-    next();
-});
-UserSchema.methods.createCart = async function () {
-    const newCart = new Cart();
-    this.cart = (await newCart.save())._id;
-};
 module.exports = mongoose.model("User", UserSchema);

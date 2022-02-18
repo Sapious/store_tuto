@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/user.models");
 const Address = require("../models/address.models");
+const Cart = require('../models/cart.models')
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 router.post("/register", async (req, res) => {
@@ -23,15 +24,16 @@ router.post("/register", async (req, res) => {
         const savedAddress = await newAddress.save();
         const salt = await bcrypt.genSalt(16);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
+        const newCart = new Cart();
+        const savedCart = (await newCart.save())._id;
         const newUser = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
             password: hashedPassword,
             address: savedAddress._id,
+            cart: savedCart._id,
         });
-
         const savedUser = await newUser.save();
         return res.status(201).json(savedUser);
     } catch (err) {
@@ -49,7 +51,6 @@ router.post("/login", async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json("Wrong Email/Password");
         }
-
         const token = jwt.sign({ _id: user._id, email: user.email, cart: user.cart }, process.env.TOKEN_KEY, {
             expiresIn: "2 days",
         });

@@ -22,10 +22,10 @@ CartSchema.pre("validate", function (next) {
 });
 
 CartSchema.methods.calculateTotal = function () {
-    console.log(this.items);
+    this.totalPrice = 0;
     this.items.forEach(item => {
         this.totalPrice += item.total;
     });
-    this.totalPriceWithTax = (this.totalPrice * this.taxPercentage) / 100;
+    this.totalPriceWithTax = this.totalPrice + (this.totalPrice * this.taxPercentage) / 100;
 };
 module.exports = mongoose.model("Cart", CartSchema);
