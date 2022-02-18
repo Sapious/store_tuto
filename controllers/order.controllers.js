@@ -1,11 +1,12 @@
 const Order = require("../models/order.models");
-
+const Cart = require("../models/cart.models");
 const createOrder = async (req, res) => {
-    const items = req.body.items.map(item => {
-        item.total = item.price * item.quantity;
-    });
+    const cart = await Cart.findById(req.verifiedUser.cart);
     const newOrder = new Order({
-        items: items,
+        items: cart.items,
+        totalPrice: cart.totalPrice,
+        totalPriceWithTax: cart.totalPriceWithTax,
+        taxPercentage: cart.taxPercentage,
         address: req.verifiedUser.address,
         client: req.verifiedUser._id,
     });

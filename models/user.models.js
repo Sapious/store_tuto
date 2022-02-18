@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
 );
 UserSchema.pre("validate", function (next) {
     if (!this.cart) {
-        createCart();
+        this.createCart();
     }
     next();
 });

@@ -27,10 +27,10 @@ const emptyCart = async (req, res) => {
 
 const addItemToCart = async (req, res) => {
     const cartId = req.verifiedUser.cart;
-
+    const item = { ...req.body.item, total: req.body.item.price * req.body.item.quantity };
     try {
         const cart = await Cart.findById(cartId);
-        cart.items.push(req.body.item);
+        cart.items.push(item);
         const savedCart = await cart.save();
         return res.status(200).json(savedCart);
     } catch (err) {

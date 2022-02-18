@@ -17,11 +17,11 @@ const ProductSchema = new mongoose.Schema(
 
 ProductSchema.pre("validate", function (next) {
     if (!this.slug) {
-        slugify();
+        this.slugify();
     }
     next();
 });
 ProductSchema.methods.slugify = function () {
-    this.slug = slug(this.title) + ((Math.random() * Math.pow(36, 6)) | 0).toString(36);
+    this.slug = slug(this.title) + "-"+ ((Math.random() * Math.pow(36, 6)) | 0).toString(36);
 };
 module.exports = mongoose.model("Product", ProductSchema);

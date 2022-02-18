@@ -20,16 +20,4 @@ const OrderSchema = new mongoose.Schema(
     { timestamps: true },
 );
 
-OrderSchema.pre("validate", function (next) {
-    calculateTotal();
-    next();
-});
-
-OrderSchema.methods.calculateTotal = function () {
-    this.items.forEach(item => {
-        this.totalPrice += item.total;
-    });
-    this.totalPriceWithTax = (this.totalPrice * this.taxPercentage) / 100;
-};
-
 module.exports = mongoose.model("Order", OrderSchema);
