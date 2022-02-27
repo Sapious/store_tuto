@@ -14,3 +14,7 @@ router.delete("/:productId", verifyToken, deleteProduct);
 router.get("/:productId", getProduct);
 router.get("/", getProducts);
 module.exports = router;
+//TODO: use slug instead of id
+
+// TODO: add review product routes (optional)
+// TODO: add feedback on product routes (optional)

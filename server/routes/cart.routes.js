@@ -7,4 +7,5 @@ router.get("/me", verifyToken, getOwnedCart);
 router.put("/add", verifyToken, addItemToCart);
 router.put("/remove", verifyToken, removeItemFromCart);
 module.exports = router;
-    
+
+//TODO: public api to add_to_cart (optional)

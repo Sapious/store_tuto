@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/user.models");
 const Address = require("../models/address.models");
-const Cart = require('../models/cart.models')
+const Cart = require("../models/cart.models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 router.post("/register", async (req, res) => {
@@ -51,9 +51,13 @@ router.post("/login", async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json("Wrong Email/Password");
         }
-        const token = jwt.sign({ _id: user._id, email: user.email, cart: user.cart }, process.env.TOKEN_KEY, {
-            expiresIn: "2 days",
-        });
+        const token = jwt.sign(
+            { _id: user._id, email: user.email, cart: user.cart, isAdmin: user.isAdmin },
+            process.env.TOKEN_KEY,
+            {
+                expiresIn: "2 days",
+            },
+        );
 
         return res.status(200).json({ user: user, token: token });
     } catch (err) {

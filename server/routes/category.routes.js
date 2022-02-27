@@ -13,3 +13,4 @@ router.delete("/:categoryId", deleteCategory);
 router.get("/:categoryId", getCategory);
 router.get("/", getCategories);
 module.exports = router;
+ //TODO: use slug instead of id

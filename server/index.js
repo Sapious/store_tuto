@@ -20,6 +20,7 @@ const authRouter = require("./routes/auth.routes");
 const addressRouter = require("./routes/address.routes");
 const orderRouter = require("./routes/order.routes");
 const cartRouter = require("./routes/cart.routes");
+
 //middlewares
 
 app.use(express.json());

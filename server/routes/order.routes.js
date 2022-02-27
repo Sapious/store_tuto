@@ -6,3 +6,7 @@ router.post("/", verifyToken, createOrder);
 router.get("/:orderId", verifyToken, getOrder);
 router.get("/", verifyToken, getOrders);
 module.exports = router;
+
+// TODO: router to confirm, cancel, fullfill an order
+// TODO: router to get my own orders
+// TODO: add middleware to verify ownership of order

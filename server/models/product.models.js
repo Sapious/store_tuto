@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const slug = require("slug");
 const ProductSchema = new mongoose.Schema(
+   
     {
         image: { type: String },
         title: { type: String },
