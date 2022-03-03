@@ -1,4 +1,10 @@
-const { updateAddress, deleteAddress, getAddress, getAddresses } = require("../controllers/address.controllers");
+const {
+    updateAddress,
+    deleteAddress,
+    getAddress,
+    getAddresses,
+    getMyAddress,
+} = require("../controllers/address.controllers");
 const isAdmin = require("../middlewares/isAdmin");
 const verifyToken = require("../middlewares/verifyToken");
 const router = require("express").Router();
