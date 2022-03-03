@@ -1,12 +1,24 @@
-const { createOrder, getOrder, getOrders } = require("../controllers/order.controllers");
+const {
+    createOrder,
+    getOrder,
+    getOrders,
+    getOwnedOrders,
+    confirmOrder,
+    fullfilOrder,
+    cancelOrder,
+    getOwnedOrder,
+} = require("../controllers/order.controllers");
 const verifyToken = require("../middlewares/verifyToken");
+const isAdmin = require("../middlewares/isAdmin");
 const router = require("express").Router();
 
 router.post("/", verifyToken, createOrder);
-router.get("/:orderId", verifyToken, getOrder);
+router.get("/me", verifyToken, getOwnedOrders);
+router.get("/:orderId", verifyToken, isAdmin, getOrder);
+router.get("/:orderId/me", verifyToken, getOwnedOrder);
+router.get("/:orderId/confirm", verifyToken, confirmOrder);
+router.get("/:orderId/cancel", verifyToken, cancelOrder);
+router.get("/:orderId/fullfil", verifyToken, fullfilOrder);
 router.get("/", verifyToken, getOrders);
-module.exports = router;
 
-// TODO: router to confirm, cancel, fullfill an order
-// TODO: router to get my own orders
-// TODO: add middleware to verify ownership of order
+module.exports = router;

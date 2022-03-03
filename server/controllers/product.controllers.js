@@ -18,10 +18,10 @@ const createProduct = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
-    const id = req.params.productId;
+    const slug = req.params.productSlug;
 
     try {
-        const product = await Product.findById(id).populate("category");
+        const product = await Product.findOne({ slug: slug }).populate("category");
         return res.status(200).json(product);
     } catch (err) {
         return res.status(500).json(err);

@@ -10,7 +10,6 @@ const router = require("express").Router();
 router.post("/", createCategory);
 router.put("/:categoryId", updateCategory);
 router.delete("/:categoryId", deleteCategory);
-router.get("/:categoryId", getCategory);
+router.get("/:categorySlug", getCategory);
 router.get("/", getCategories);
 module.exports = router;
- //TODO: use slug instead of id

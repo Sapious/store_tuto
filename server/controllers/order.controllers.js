@@ -37,7 +37,61 @@ const getOrders = async (req, res) => {
         return res.status(500).json(err);
     }
 };
-
+const getOwnedOrders = async (req, res) => {
+    const userId = req.verifiedUser._id;
+    try {
+        const orders = await Order.find({ client: userId });
+        return res.status(200).json(orders);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+};
+const confirmOrder = async (req, res) => {
+    const orderId = req.params.orderId;
+    try {
+        const confirmedOrder = await Order.findByIdAndUpdate(orderId, { status: "confirmed" }, { new: true });
+        return res.status(200).json(confirmedOrder);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+};
+const cancelOrder = async (req, res) => {
+    const orderId = req.params.orderId;
+    try {
+        const canceledOrder = await Order.findByIdAndUpdate(orderId, { status: "canceled" }, { new: true });
+        return res.status(200).json(canceledOrder);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+};
+const fullfilOrder = async (req, res) => {
+    const orderId = req.params.orderId;
+    try {
+        const fulfilledOrder = await Order.findByIdAndUpdate(orderId, { status: "fulfilled" }, { new: true });
+        return res.status(200).json(fulfilledOrder);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+};
+const getOwnedOrder = async (req, res) => {
+    const orderId = req.params.orderId;
+    const userId = req.verifiedUser._id;
+    try {
+        const order = await Order.findById(orderId);
+        if (userId === order.client) {
+            return res.status(200).json(order);
+        } else {
+            return res.status(403).json("you don't own this order");
+        }
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+};
+module.exports.getOwnedOrder = getOwnedOrder;
+module.exports.confirmOrder = confirmOrder;
+module.exports.cancelOrder = cancelOrder;
+module.exports.fullfilOrder = fullfilOrder;
+module.exports.getOwnedOrders = getOwnedOrders;
 module.exports.createOrder = createOrder;
 module.exports.getOrder = getOrder;
 module.exports.getOrders = getOrders;
