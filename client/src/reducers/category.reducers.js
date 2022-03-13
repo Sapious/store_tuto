@@ -1,12 +1,12 @@
 import {
-	GET_PRODUCT,
-	GET_PRODUCTS,
-	PRODUCT_ERROR,
-	PRODUCT_LOADING,
+	GET_CATEGORY,
+	GET_CATEGORIES,
+	CATEGORY_ERROR,
+	CATEGORY_LOADING,
 } from "../constants/actions";
 const initialState = {
-	products: [],
-	product: null,
+	categories: [],
+	category: null,
 	isLoading: false,
 	error: {},
 };
@@ -14,28 +14,28 @@ const initialState = {
 export default function (state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
-		case PRODUCT_LOADING:
+		case CATEGORY_LOADING:
 			return {
 				...state,
 				isLoading: true,
 			};
-		case GET_PRODUCTS:
+		case GET_CATEGORIES:
 			return {
 				...state,
-				products: payload,
+				categories: payload,
 				isLoading: false,
 			};
-		case GET_PRODUCT:
+		case GET_CATEGORY:
 			return {
 				...state,
-				product: payload,
+				category: payload,
 				isLoading: false,
 			};
-		case PRODUCT_ERROR:
+		case CATEGORY_ERROR:
 			return {
 				isLoading: false,
-				products: [],
-				product: null,
+				categories: [],
+				category: null,
 				error: payload,
 			};
 		default:

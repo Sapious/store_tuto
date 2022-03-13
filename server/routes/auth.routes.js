@@ -4,6 +4,22 @@ const Address = require("../models/address.models");
 const Cart = require("../models/cart.models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("../middlewares/verifyToken");
+
+router.get("/check", verifyToken, async (req, res) => {
+    // check user token validation on request
+
+    try {
+        const user = await User.findById(req.verifiedUser._id);
+        if (!user) {
+            return res.status(404).json("not found user");
+        } else {
+            return res.status(200).json(user);
+        }
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+});
 router.post("/register", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });

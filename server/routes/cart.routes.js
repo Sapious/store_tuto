@@ -1,4 +1,4 @@
-const { getOwnedCart, addItemToCart, removeItemFromCart } = require("../controllers/cart.controllers");
+const { getOwnedCart, addItemToCart, removeItemFromCart, getPublicCart } = require("../controllers/cart.controllers");
 const verifyToken = require("../middlewares/verifyToken");
 
 const router = require("express").Router();

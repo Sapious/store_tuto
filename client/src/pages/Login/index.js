@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { login } from "../../actions/auth.actions";
+import Spinner from "../../shared/Spinner";
 const Login = () => {
 	const dispatch = useDispatch();
-	const { isLoading } = useSelector((state) => {
+	const { isLoading, isAuthenticated } = useSelector((state) => {
 		return state.authReducers;
 	});
 	const [Form, setForm] = useState({
@@ -23,8 +25,12 @@ const Login = () => {
 			password: "",
 		});
 	};
+
+	if (isAuthenticated) {
+		return <Navigate to={"/"} />;
+	}
 	return isLoading ? (
-		<div>hello loading</div>
+		<Spinner />
 	) : (
 		<div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5 max-w-2xl mx-auto">
 			<div>
@@ -47,6 +53,7 @@ const Login = () => {
 					<div className="mt-1 sm:mt-0">
 						<input
 							required
+							value={Form.email}
 							onChange={(e) => onInputChange(e)}
 							id="email"
 							name="email"
@@ -65,6 +72,7 @@ const Login = () => {
 					<div className="mt-1 sm:mt-0">
 						<input
 							required
+							value={Form.password}
 							onChange={(e) => onInputChange(e)}
 							id="password"
 							name="password"

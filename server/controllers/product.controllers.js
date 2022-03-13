@@ -28,16 +28,20 @@ const getProduct = async (req, res) => {
     }
 };
 const getProducts = async (req, res) => {
+    const limit = req.query.limit ? parseInt(req.query.limit) : 8;
     let filter = {};
     if (req.query.category) {
         filter.category = (
             await Category.findOne({
-                title: req.query.category,
+                slug: req.query.category,
             })
         )?._id;
     }
+    if (req.query.q) {
+        filter.title = { $regex: ".*" + req.query.q + ".*", $options: "i" };
+    }
     try {
-        const products = await Product.find(filter).populate("category");
+        const products = await Product.find(filter).limit(limit).populate("category");
         return res.status(200).json(products);
     } catch (err) {
         return res.status(500).json(err);

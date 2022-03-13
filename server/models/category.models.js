@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-
+const slug = require("slug");
 const CategorySchema = new mongoose.Schema(
     {
-        title: { type: String, unique: true, index: true },
+        title: { type: String },
         slug: { type: String, unique: true, index: true, lowercase: true },
         description: { type: String },
     },

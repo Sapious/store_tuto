@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/auth.actions";
+import { Navigate, useNavigate } from "react-router-dom";
+import Spinner from "../../shared/Spinner";
 const Register = () => {
 	const dispatch = useDispatch();
+	const { isLoading, isAuthenticated } = useSelector((state) => {
+		return state.authReducers;
+	});
 	const [Form, setForm] = useState({
 		firstName: "",
 		lastName: "",
@@ -32,7 +37,12 @@ const Register = () => {
 			street: "",
 		});
 	};
-	return (
+	if (isAuthenticated) {
+		return <Navigate to={"/"} />;
+	}
+	return isLoading ? (
+		<Spinner />
+	) : (
 		<div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5 max-w-2xl mx-auto">
 			<div>
 				<h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -54,6 +64,7 @@ const Register = () => {
 						</label>
 						<div className="mt-1 sm:mt-0">
 							<input
+								value={Form.firstName}
 								required
 								onChange={(e) => onInputChange(e)}
 								type="text"
@@ -73,6 +84,7 @@ const Register = () => {
 						</label>
 						<div className="mt-1 sm:mt-0">
 							<input
+								value={Form.lastName}
 								required
 								onChange={(e) => onInputChange(e)}
 								type="text"
@@ -92,6 +104,7 @@ const Register = () => {
 					</label>
 					<div className="mt-1 sm:mt-0">
 						<input
+							value={Form.email}
 							required
 							onChange={(e) => onInputChange(e)}
 							id="email"
@@ -111,6 +124,7 @@ const Register = () => {
 						</label>
 						<div className="mt-1 sm:mt-0">
 							<input
+								value={Form.password}
 								required
 								onChange={(e) => onInputChange(e)}
 								type="password"
@@ -129,6 +143,7 @@ const Register = () => {
 						</label>
 						<div className="mt-1 sm:mt-0">
 							<input
+								value={Form.confirmPassword}
 								required
 								onChange={(e) => onInputChange(e)}
 								type="password"
@@ -149,6 +164,7 @@ const Register = () => {
 						</label>
 						<div className="mt-1 sm:mt-0">
 							<input
+								value={Form.street}
 								required
 								onChange={(e) => onInputChange(e)}
 								type="text"
@@ -168,6 +184,7 @@ const Register = () => {
 						</label>
 						<div className="mt-1 sm:mt-0">
 							<input
+								value={Form.city}
 								required
 								onChange={(e) => onInputChange(e)}
 								type="text"
@@ -186,6 +203,7 @@ const Register = () => {
 						</label>
 						<div className="mt-1 sm:mt-0">
 							<input
+								value={Form.zipCode}
 								required
 								onChange={(e) => onInputChange(e)}
 								type="text"
