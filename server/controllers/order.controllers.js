@@ -1,6 +1,6 @@
 const Order = require("../models/order.models");
 const Cart = require("../models/cart.models");
-const createOrder = async (req, res) => {
+const checkoutOrder = async (req, res) => {
     const cart = await Cart.findById(req.verifiedUser.cart);
     const newOrder = new Order({
         items: cart.items,
@@ -13,6 +13,10 @@ const createOrder = async (req, res) => {
 
     try {
         const savedOrder = await newOrder.save();
+        cart.items = [];
+        cart.totalPrice = 0;
+        cart.totalPriceWithTax = 0;
+        await cart.save();
         return res.status(201).json(savedOrder);
     } catch (err) {
         return res.status(500).json(err);
@@ -92,6 +96,6 @@ module.exports.confirmOrder = confirmOrder;
 module.exports.cancelOrder = cancelOrder;
 module.exports.fullfilOrder = fullfilOrder;
 module.exports.getOwnedOrders = getOwnedOrders;
-module.exports.createOrder = createOrder;
+module.exports.checkoutOrder = checkoutOrder;
 module.exports.getOrder = getOrder;
 module.exports.getOrders = getOrders;

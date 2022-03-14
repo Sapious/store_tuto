@@ -1,5 +1,5 @@
 const {
-    createOrder,
+    checkoutOrder,
     getOrder,
     getOrders,
     getOwnedOrders,
@@ -12,7 +12,7 @@ const verifyToken = require("../middlewares/verifyToken");
 const isAdmin = require("../middlewares/isAdmin");
 const router = require("express").Router();
 
-router.post("/", verifyToken, createOrder);
+router.get("/checkout", verifyToken, checkoutOrder);
 router.get("/me", verifyToken, getOwnedOrders);
 router.get("/:orderId", verifyToken, isAdmin, getOrder);
 router.get("/:orderId/me", verifyToken, getOwnedOrder);

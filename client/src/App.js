@@ -9,9 +9,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProductDetails from "./pages/ProductDetails";
 import Search from "./pages/Search";
-import Categories from "./pages/categories";
+import Categories from "./pages/Categories";
 import { setAuthToken } from "./utils/setAuthToken";
 import { authcheck, logout } from "./actions/auth.actions";
+import Cart from "./pages/Cart";
 function App() {
 	useEffect(() => {
 		// check for token in LS when app first runs
@@ -41,6 +42,7 @@ function App() {
 							<Route path="/search" element={<Search />}></Route>
 							<Route path="/categories" element={<Categories />}></Route>
 							<Route path="/products/:slug" element={<ProductDetails />} />
+							<Route path="/cart" element={<Cart />} />
 						</Routes>
 					</div>
 					<Footer />

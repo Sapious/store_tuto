@@ -3,7 +3,7 @@ const getOwnedCart = async (req, res) => {
     const cartId = req.verifiedUser.cart;
 
     try {
-        const cart = await Cart.findById(cartId);
+        const cart = await Cart.findById(cartId).populate({ path: "items.product", select: "image title slug" });
         return res.status(200).json(cart);
     } catch (err) {
         return res.status(500).json(err);

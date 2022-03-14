@@ -48,7 +48,7 @@ const ProductDetails = () => {
 						</div>
 
 						<div className="flex justify-start items-center gap-3">
-							<i class="fas fa-check text-green-500"></i>
+							<i className="fas fa-check text-green-500"></i>
 							<div className="ml-2 text-sm text-gray-500">
 								In stock and ready to ship
 							</div>
