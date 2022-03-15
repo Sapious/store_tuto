@@ -28,7 +28,7 @@ const Cart = () => {
 						<h2 className="sr-only">Items in your shopping cart</h2>
 
 						<ul className="border-t border-b border-gray-200 divide-y divide-gray-200">
-							{items.map((product) => (
+							{items.length > 0 && items.map((product) => (
 								<li key={product.product._id} className="flex py-6 sm:py-10">
 									<div className="flex-shrink-0">
 										<img
