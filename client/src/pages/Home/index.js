@@ -23,7 +23,7 @@ const Home = () => {
 				</h2>
 
 				<div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-					{products &&
+					{products !== [] &&
 						products.map((product) => (
 							<ProductItem key={product._id} product={product} />
 						))}
