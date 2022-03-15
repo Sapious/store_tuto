@@ -18,7 +18,7 @@ export const authcheck = () => async (dispatch) => {
 		setAuthToken(localStorage.getItem("token"));
 	}
 	try {
-		const res = await axios.get("/auth/check");
+		const res = await axios.get("/api/auth/check");
 		dispatch({
 			type: AUTH_CHECK,
 			payload: res.data,
@@ -35,7 +35,7 @@ export const login = (data) => async (dispatch) => {
 		type: AUTH_LOADING,
 	});
 	try {
-		const res = await axios.post("/auth/login", data, {
+		const res = await axios.post("/api/auth/login", data, {
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -57,7 +57,7 @@ export const register = (data) => async (dispatch) => {
 		type: AUTH_LOADING,
 	});
 	try {
-		const res = await axios.post("/auth/register", data, {
+		const res = await axios.post("/api/auth/register", data, {
 			headers: {
 				"Content-Type": "application/json",
 			},

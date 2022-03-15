@@ -17,7 +17,7 @@ export const getProducts = (queries) => async (dispatch) => {
 	}
 
 	try {
-		const res = await axios.get(`/products${queryString}`);
+		const res = await axios.get(`/api/products${queryString}`);
 		dispatch({
 			type: GET_PRODUCTS,
 			payload: res.data,
@@ -35,7 +35,7 @@ export const getProduct = (slug) => async (dispatch) => {
 		type: PRODUCT_LOADING,
 	});
 	try {
-		const res = await axios.get(`/products/${slug}`);
+		const res = await axios.get(`/api/products/${slug}`);
 		dispatch({
 			type: GET_PRODUCT,
 			payload: res.data,

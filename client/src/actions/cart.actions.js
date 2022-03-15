@@ -14,7 +14,7 @@ export const addToCart = (itemData) => async (dispatch) => {
 	});
 
 	try {
-		const res = await axios.put("/carts/add", { item: itemData });
+		const res = await axios.put("/api/carts/add", { item: itemData });
 		dispatch({
 			type: ADD_TO_CART,
 			payload: res.data,
@@ -32,7 +32,7 @@ export const removeToCart = (itemId) => async (dispatch) => {
 	});
 
 	try {
-		const res = await axios.put("/carts/remove", { item: itemId });
+		const res = await axios.put("/api/carts/remove", { item: itemId });
 		dispatch({
 			type: REMOVE_FROM_CART,
 			payload: res.data,
@@ -51,7 +51,7 @@ export const emptyCart = () => async (dispatch) => {
 	});
 
 	try {
-		await axios.delete("/carts/empty");
+		await axios.delete("/api/carts/empty");
 		dispatch({
 			type: EMPTY_CART,
 		});
@@ -68,7 +68,7 @@ export const getOwnedCart = () => async (dispatch) => {
 	});
 
 	try {
-		const res = await axios.get("/carts/me");
+		const res = await axios.get("/api/carts/me");
 		dispatch({
 			type: GET_OWNED_CART,
 			payload: res.data,

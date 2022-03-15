@@ -12,7 +12,7 @@ export const checkoutOrder = () => async (dispatch) => {
 	});
 
 	try {
-		const res = await axios.get("/orders/checkout");
+		const res = await axios.get("/api/orders/checkout");
 		dispatch({
 			type: CHECKOUT_ORDER,
 			payload: res.data,

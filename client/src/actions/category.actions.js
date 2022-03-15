@@ -9,7 +9,7 @@ export const getCategories = () => async (dispatch) => {
 		type: CATEGORY_LOADING,
 	});
 	try {
-		const res = await axios.get(`/categories`);
+		const res = await axios.get(`/api/categories`);
 		dispatch({
 			type: GET_CATEGORIES,
 			payload: res.data,
