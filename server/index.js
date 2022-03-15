@@ -37,7 +37,7 @@ app.use("/api/carts", cartRouter);
 
 app.use(express.static("../client/build"));
 app.use("*", (req, res) => {
-    res.sendFile(path.resolve("..", "client", "build", "index.html"));
+    res.sendFile(path.resolve("build", "index.html"));
 });
 //server listening
 const port = process.env.PORT || 8000;
