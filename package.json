@@ -6,7 +6,9 @@
   "scripts": {
     "server:dev": "cd server && npm run dev",
     "client:dev": "cd client && npm start",
+    "prestart": "cd client && npm run build",
     "start": "cd server && npm start",
+    "postinstall": "concurrently -n 'server,client' -c 'red,green' \"cd client && npm i \" \"cd server && npm i\"",
     "dev": "concurrently -n 'server,client' -c 'red,green' \"npm run server:dev\" \"npm run client:dev\""
   },
   "repository": {

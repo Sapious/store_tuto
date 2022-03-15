@@ -1,4 +1,5 @@
 require("dotenv").config();
+const path = require("path");
 //import section
 const express = require("express");
 const app = express();
@@ -27,12 +28,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routes middlewares
-app.use("/products", productRouter);
-app.use("/categories", categoryRouter);
-app.use("/auth", authRouter);
-app.use("/addresses", addressRouter);
-app.use("/orders", orderRouter);
-app.use("/carts", cartRouter);
+app.use("/api/products", productRouter);
+app.use("/api/categories", categoryRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/addresses", addressRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/carts", cartRouter);
+
+app.use(express.static("../client/build"));
+app.use("*", (req, res) => {
+    res.sendFile(path.resolve("..", "client", "build", "index.html"));
+});
 //server listening
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
