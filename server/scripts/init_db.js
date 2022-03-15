@@ -6,7 +6,9 @@ const Category = require("../models/category.models");
 const Product = require("../models/product.models");
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/store_tuto");
+mongoose.connect(
+    "mongodb+srv://heroku:PkH8TGdMOtHtum2x@cluster0.lfyij.mongodb.net/store_tuto?retryWrites=true&w=majority",
+);
 mongoose.connection.on("connected", () => {
     console.log("DB connected");
 });
