@@ -35,7 +35,7 @@ app.use("/api/addresses", addressRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/carts", cartRouter);
 
-app.use(express.static("../client/build"));
+app.use(express.static("./build"));
 app.use("*", (req, res) => {
     res.sendFile(path.resolve("build", "index.html"));
 });
