@@ -80,7 +80,7 @@ const Header = () => {
 								<Link to="/cart" className="relative p-2 cursor-pointer">
 									<i className="fas fa-shopping-cart text-white text-3xl"></i>
 									<span className="bg-red-200 rounded-full font-bold px-1.5 py-0.5 right-0 absolute text-xs">
-										{items.length > 0 ? getNumberOfItems(items) : 0}
+										{items ? getNumberOfItems(items) : 0}
 									</span>
 								</Link>
 								<button
